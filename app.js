@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT;
 const cors = require("cors");
 const connectToDb = require("./db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 connectToDb();
 
