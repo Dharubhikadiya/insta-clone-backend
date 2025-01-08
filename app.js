@@ -2,21 +2,26 @@ const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000; // Default port to 5000 if not set in .env
+const PORT = process.env.PORT || 5000;
 const cors = require("cors");
 const connectToDb = require("./db");
-const bcrypt = require("bcryptjs");
 
 connectToDb();
 
 // Middleware
 app.use(express.json());
 
-// Allow CORS for the frontend
-const allowedOrigins = ["https://insta-clone-frontend-seven.vercel.app"]; // Add your frontend URL here
+// Configure CORS
+const allowedOrigins = [
+  "https://insta-clone-frontend-ln6u.vercel.app", // Add your Vercel frontend URL
+  "http://localhost:3000", // For local testing (optional)
+];
+
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: allowedOrigins, // Allow only specific origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     credentials: true, // Allow cookies and other credentials
   })
 );
