@@ -12,9 +12,20 @@ connectToDb();
 // Middleware
 app.use(express.json());
 
+const allowedOrigins = [
+  "https://insta-clone-frontend-five.vercel.app",
+  "https://insta-clone-frontend-11vb.vercel.app",
+];
+
 const corsOptions = {
-  origin: "https://insta-clone-frontend-five.vercel.app", // Your frontend URL
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Allow cookies if needed
 };
 
