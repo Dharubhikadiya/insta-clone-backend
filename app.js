@@ -21,6 +21,9 @@ require("./models/post");
 app.use(require("./routes/auth"));
 app.use(require("./routes/createpost"));
 app.use(require("./routes/user"));
+app.get("/", (req,res) => {
+  res.send("Hello, Instagram Clone Backend!");
+})
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
