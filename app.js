@@ -11,25 +11,17 @@ connectToDb();
 
 // Middleware
 app.use(express.json());
-
-const allowedOrigins = [
-  "https://insta-clone-frontend-five.vercel.app",
-  "https://insta-clone-frontend-11vb.vercel.app",
-];
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: [
+    "https://insta-clone-frontend-five.vercel.app",
+    "https://insta-clone-frontend-11vb.vercel.app",
+  ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow cookies if needed
+  credentials: true, // Allows cookies
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 // Models
 require("./models/model");
